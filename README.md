@@ -30,5 +30,5 @@ Here are some previews...
 
 ## Previews
 
-![preview](https://github.com/crash-override404/termuz-omz/blob/master/.files/preview_omz.jpg) <br />
+![preview](https://github.com/crash-override404/termux-omz/blob/master/.files/preview_omz.jpg) <br />
 
