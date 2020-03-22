@@ -1,0 +1,65 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+## Author : Aditya Shakya
+## Email  : adi1090x@gmail.com
+
+#colors
+R='\033[1;31m'
+B='\033[1;34m'
+C='\033[0;36m'
+G='\033[1;32m'
+W='\033[1;37m'
+Y='\033[1;33m'
+
+DIR="$(pwd)"
+
+echo
+echo -e $B" ┌─────────────────────────────────┐"
+echo -e $B" │   $R┏━┓╻ ╻   $Y┏┳┓╻ ╻   $G╺━┓┏━┓╻ ╻   $B│"
+echo -e $B" │   $R┃ ┃┣━┫$C╺━╸$Y┃┃┃┗┳┛$C╺━╸$G┏━┛┗━┓┣━┫   $B│"
+echo -e $B" │   $R┗━┛╹ ╹   $Y╹ ╹ ╹    $G┗━╸┗━┛╹ ╹   $B│"
+echo -e $B" └─────────────────────────────────┘"
+echo -e $W"  By:$C Aditya Shakya"
+echo
+
+echo
+echo -e $Y" [*] Installing Dependencies..."$C
+echo
+apt update -y && apt install -y git zsh
+echo
+echo -e $G" [*] Succesfully Installed!"$C
+echo
+
+if [ -d "$HOME/.termux" ]; then
+mv $HOME/.termux $HOME/.termux.bak
+fi
+
+if [ ! -d $HOME/.termux ]; then
+mkdir $HOME/.termux
+fi
+
+echo -e $Y" [*] Downloading oh-my-zsh Files..."$C
+echo
+git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh --depth 1
+echo
+echo -e $G" [*] Downloaded Successfully..."$C
+echo
+echo -e $Y" [*] Setting Up Configurations..."$C
+echo
+cp $HOME/.oh-my-zsh/templates/zshrc.zsh-template $HOME/.zshrc
+echo -e $Y" [*] Changing Default Shell to 'zsh'."
+echo
+chsh -s zsh
+echo -e $Y" [*] Setting Up Colors, Fonts & Theme..."
+echo
+mv $DIR/.files/colors.properties $HOME/.termux/colors.properties
+mv $DIR/.files/font.ttf $HOME/.termux/font.ttf
+mv $DIR/.files/igeek.zsh-theme $HOME/.oh-my-zsh/themes/igeek.zsh-theme
+sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="igeek"/g' $HOME/.zshrc
+
+termux-setup-storage
+termux-reload-settings
+echo -e $R" [*] Setup Completed. Enjoy oh-my-zsh in Termux."
+echo
+exit
+
