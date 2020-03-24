@@ -55,8 +55,10 @@ echo
 mv $DIR/.files/colors.properties $HOME/.termux/colors.properties
 mv $DIR/.files/font.ttf $HOME/.termux/font.ttf
 mv $DIR/.files/igeek.zsh-theme $HOME/.oh-my-zsh/themes/igeek.zsh-theme
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="igeek"/g' $HOME/.zshrc
-
+sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/g' $HOME/.zshrc
 termux-setup-storage
 termux-reload-settings
 echo -e $R" [*] Setup Completed. Enjoy oh-my-zsh in Termux."
